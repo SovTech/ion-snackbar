@@ -4,14 +4,14 @@ angular.module("snackbar", ['ngAnimate']).service('$snackbar', function($http, $
   var timeout = {};
   var template = $http({
     method: 'GET',
-    url: './snackbar.html'
+    url: 'lib/ion-snackbar/snackbar.html'
   }).then(function(result) {
     var body = document.getElementsByTagName("body")[0];
     var previousSnackbar = document.getElementsByClassName('snackbar-wrapper');
     if (previousSnackbar.length == 0) {
       if(navigator.userAgent.indexOf('Mobile') == -1) {
         var head = document.getElementsByTagName('head');
-        angular.element(head).append('<link href="./snackbar-tablet.css" rel="stylesheet">');
+        angular.element(head).append('<link href="lib/ion-snackbar/snackbar-tablet.css" rel="stylesheet">');
       }
       angular.element(body).append(result.data)
     }
@@ -83,5 +83,16 @@ angular.module("snackbar", ['ngAnimate']).service('$snackbar', function($http, $
     var wrapper = document.getElementsByClassName("snackbar-wrapper");
     angular.element(wrapper).triggerHandler('snackbar-closed');
     angular.element(wrapper).removeClass("active");
+  };
+  this.showLongDismissable = function (message) {
+    var options = {
+        message: message,
+        time: 'LONG',
+        buttonName: 'CLOSE',
+        messageColor: 'white',
+        buttonColor: 'white',
+        buttonFunction: function () { this.hide(); }.bind(this)
+    }
+    this.show(options);
   };
 })
