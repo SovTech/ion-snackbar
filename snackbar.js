@@ -85,24 +85,22 @@ angular.module("snackbar", ['ngAnimate']).service('$snackbar', function($http, $
     angular.element(snackbarContainer).removeClass("active");
   }
 
+  function showLongDismissable(message) {
+    var options = {
+      message: message,
+      time: 'LONG',
+      buttonName: 'CLOSE',
+      messageColor: 'white',
+      buttonColor: 'white',
+      buttonFunction: function () { hide(); }.bind(this)
+    }
+    show(options);
+  };
+
   return {
     init: init,
     show: show,
-    hide: hide
+    hide: hide,
+    showLongDismissable: showLongDismissable
   };
-<<<<<<< HEAD
-  this.showLongDismissable = function (message) {
-    var options = {
-        message: message,
-        time: 'LONG',
-        buttonName: 'CLOSE',
-        messageColor: 'white',
-        buttonColor: 'white',
-        buttonFunction: function () { this.hide(); }.bind(this)
-    }
-    this.show(options);
-  };
-})
-=======
 });
->>>>>>> master
